@@ -13,7 +13,14 @@ import { InfoMessageComponent } from '../info-message/info-message.component';
 export class CounterComponent implements OnInit {
   private zone = inject(NgZone)
 
-  ngOnInit(): void {
+  count = signal(0);
+
+  get debugOutput() {
+    console.log('[Counter] "debugOutput" binding re-evaluated.');
+    return 'Counter Component Debug Output';
+  }
+
+   ngOnInit(): void {
     setTimeout(() => {
       this.count.set(0)
     }, 4000)
@@ -23,13 +30,6 @@ export class CounterComponent implements OnInit {
         console.log('Timer expired!')
       }, 5000)
     })
-  }
-
-  count = signal(0);
-
-  get debugOutput() {
-    console.log('[Counter] "debugOutput" binding re-evaluated.');
-    return 'Counter Component Debug Output';
   }
 
   onDecrement() {
